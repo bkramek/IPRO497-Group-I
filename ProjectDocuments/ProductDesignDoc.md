@@ -82,9 +82,11 @@ Python Backend (Raspberry Pi)
 
 ### Scenario 1 ###
 
+James is a commuter student who wants to reliably be able to find a space to study and work on assignments between his morning and afternoon classes. His friends tell him about an app that will allow him to reserve a space on campus where he'll be able to study and work without worrying about interruptions. James downloads the app, searches for a quieter area of campus, selects a room in the library, and reserves it for Monday between 12:30 pm and 1:40 pm. At 12:30 pm, he arrives at the room, and scans the QR code inside to check in. At 1:25 pm, he receives a notification that his reservation will expire in 15 minutes. At 1:35 pm, he receives a notification that his reservation will expire in 5 minutes. James packs up his belongings, scans the QR code again to check out of the room, and goes to his afternoon class.
+
 ### Scenario 2 ###
 
-### Scenario 3 ###
+Pip is an average “B” student and wants to maximize his time to study, but his roommates are quite noisy and he couldn’t concentrate on his studies. He really wants to find a space to study and improve his grade to “A”. He found an app that allows him to reserve his desired space on campus without any issue. He downloaded the study app and found great space to study in the library. And, he reserved the space so easily and got a reservation notification for Friday at 2pm between 5pm. On Friday, he goes to the space and scans that QR code, on the corner of table and gets his check in notification on his phone. At 4:50pm, he gets a notification that his reservation is expiring in 10 minutes. Then, he packs up his stuffs and takes the picture of the table and room to prove the room is clean. Then he scans the QR code once again to check out. 
 
 ## Team Members ##
 | Name | Location | Timezone Offset |
