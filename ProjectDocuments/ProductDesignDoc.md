@@ -66,6 +66,16 @@ Android App (Java)
 
 Python Backend (Raspberry Pi)
 
+## Top Application Capabilities ##
+
+- Reserve a space on campus (user selects a duration of the reservation)
+- View frequency of use of an area of campus
+- Add a specific space to your "Favorites" and receive alerts when it is available for reservation
+- University officials can create a list of spaces that can be reserved
+- Reserve a space as a group (with multiple users)
+- Check in/check out of a space (QR codes, scan when checking in/out, space automatically freed up if user is late, user can check out early by scanning the code again)
+- Send push notifications when a reservation is about to end (15 min. before, 5 min. before)
+- Users can "rate" the previous occupant (whether the room was clean, whether it was in order)
 
 ## Team Members ##
 | Name | Location | Timezone Offset |
