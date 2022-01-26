@@ -52,6 +52,21 @@ College students can reserve pre-approved spaces on campus, allowing them to fin
 - Allow the student to view an area's frequency of use
 - Provide real-time information about how busy an area of campus is
 
+## Application Type ##
+
+Android Mobile App
+
+### Tech Stack ###
+
+#### Client Tech ####
+
+Android App (Java)
+
+#### Server Tech ####
+
+Python Backend (Raspberry Pi)
+
+
 ## Team Members ##
 | Name | Location | Timezone Offset |
 | ---- | -------- | --------------- |
