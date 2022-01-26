@@ -96,3 +96,11 @@ Pip is an average “B” student and wants to maximize his time to study, but h
 | Ghaleb Rajei | Chicago | 0 |
 | Christopher Katz | Chicago | 0 |
 | Michal Malek | Chicago | 0 |
+
+## Team Working Agreement ##
+- We will use Github and keep items updated as progress is made
+- If we need to meet outside of class, we've agreed that evenings work the best for everyone in the team
+- If we need to meet outside of class we will use the following tool/tech for meetings: Discord
+- When we are not meeting together we will user the following tool/tech for communications: Discord
+- We will collaborate as a friendly, professional and cohesive team
+* hi
