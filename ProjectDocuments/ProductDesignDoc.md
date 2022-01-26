@@ -77,6 +77,14 @@ Python Backend (Raspberry Pi)
 - Send push notifications when a reservation is about to end (15 min. before, 5 min. before)
 - Users can "rate" the previous occupant (whether the room was clean, whether it was in order)
 
+## Top Two to Three Scenarios ##
+
+### Scenario 1 ###
+
+### Scenario 2 ###
+
+### Scenario 3 ###
+
 ## Team Members ##
 | Name | Location | Timezone Offset |
 | ---- | -------- | --------------- |
