@@ -104,6 +104,9 @@ Pip is an average “B” student and wants to maximize his time to study, but h
 - When we are not meeting together we will user the following tool/tech for communications: Discord
 - We will collaborate as a friendly, professional and cohesive team
   * We will allow each other to speak and listen intently
+  * We will take all of each other's ideas and input into consideration
+  * We will hold each other accountable
+  * We will help each other to learn, grow, and understand the technologies and processes we use to design our project
 
 ## Presentation Schedule ##
 | Date | Team Member |
