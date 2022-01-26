@@ -10,9 +10,13 @@ College students can reserve pre-approved spaces on campus, allowing them to fin
 ### Persona 1 ###
 
 **Name:** Pip Orvar
+
 **Background**
+
 **Demographics**
+
 **Goal**
+
 **How we can help**
 
 ### Persona 2 ###
