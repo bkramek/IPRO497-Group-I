@@ -13,11 +13,22 @@ College students can reserve pre-approved spaces on campus, allowing them to fin
 
 **Background**
 
+- B.S. Computer Science Student at IIT
+- Lives on campus
+- Currently a TA
+
 **Demographics**
 
-**Goal**
+- Age: 22
+
+**Goal:** Conveniently find and reserve a study space on campus.
 
 **How we can help**
+
+- Provide a platform for finding study spaces on campus
+- Allow the student to reserve a study space in advance
+- Allow the student to view an area's frequency of use
+- Provide real-time information about how busy an area of campus is
 
 ### Persona 2 ###
 
