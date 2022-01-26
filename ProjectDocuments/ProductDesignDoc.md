@@ -9,3 +9,4 @@ College students can reserve pre-approved spaces on campus, allowing them to fin
 | Name | Location | Timezone Offset |
 | ---- | -------- | --------------- |
 | Benjamin Kramek | Chicago | 0 |
+| Ghaleb Rajei | Chicago | 0 |
