@@ -103,4 +103,19 @@ Pip is an average “B” student and wants to maximize his time to study, but h
 - If we need to meet outside of class we will use the following tool/tech for meetings: Discord
 - When we are not meeting together we will user the following tool/tech for communications: Discord
 - We will collaborate as a friendly, professional and cohesive team
-* hi
+
+## Presentation Schedule ##
+| Date | Team Member |
+| :--- | :---------- |
+| 2/1 | Ghaleb |
+| 2/8 | Ghaleb |
+| 2/15 | Christopher |
+| 2/22 | Christopher |
+| 3/1 | Emma |
+| 3/8 | Emma |
+| 3/15 | Benjamin |
+| 3/22 | Benjamin |
+| 3/29 | Michal |
+| 4/5 | Michal |
+
+
