@@ -1,9 +1,10 @@
 # IPRO 497 - Group I - Product Design Document #
 
 ## Problem Statements ##
-The goal is to create reserved study space to where college students are free from distraction. We will contain productivity within these spaces to have complete organization, plans for study sessions, and an inspiring environment.
 
-College students can reserve pre-approved spaces on campus, allowing them to find quiet and non-distracting spaces to study without wasting time finding them.
+Students want to quickly and reliably reserve spaces on campus that can accomodate their individual study needs, whether they study alone or with a group.
+
+Students want to be able to find out how busy an area of campus is at a particular time, so that they can select an area of campus that meets their preferences for frequency of use.
 
 ## Customer ##
 
