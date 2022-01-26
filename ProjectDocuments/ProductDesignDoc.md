@@ -20,7 +20,7 @@ Students want to be able to find out how busy an area of campus is at a particul
 
 **Demographics**
 
-- Age: 22
+- Likes to study in a group of friends, enjoys collaborating and working together to understand the material.
 
 **Goal:** Conveniently find and reserve a study space on campus.
 
@@ -28,7 +28,7 @@ Students want to be able to find out how busy an area of campus is at a particul
 
 - Provide a platform for finding study spaces on campus
 - Allow the student to reserve a study space in advance
-- Allow the student to view an area's frequency of use
+- Allow the student to reserve a larger space for group study
 - Provide real-time information about how busy an area of campus is
 
 ### Persona 2 ###
@@ -42,7 +42,7 @@ Students want to be able to find out how busy an area of campus is at a particul
 
 **Demographics**
 
-- Age: 21
+- Works best in her own environment, with minimal distractions and disturbances.
 
 **Goal:** Reliably find a space to study and work on assignments between classes and lectures.
 
