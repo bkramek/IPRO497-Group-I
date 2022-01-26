@@ -10,3 +10,6 @@ College students can reserve pre-approved spaces on campus, allowing them to fin
 | ---- | -------- | --------------- |
 | Benjamin Kramek | Chicago | 0 |
 | Emma Diamon     | Chicago | 0 |
+| Ghabel Rajei | Chicago | 0 |
+| Christopher Katz | Chicago | 0 |
+| Michal Malek | Chicago | 0 |
