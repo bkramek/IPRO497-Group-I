@@ -117,5 +117,8 @@ Pip is an average “B” student and wants to maximize his time to study, but h
 | 3/22 | Benjamin |
 | 3/29 | Michal |
 | 4/5 | Michal |
+| 4/12 | - |
+| 4/19 | - |
+| 4/26 | - |
 
 
