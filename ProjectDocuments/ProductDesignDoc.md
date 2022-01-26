@@ -32,6 +32,26 @@ College students can reserve pre-approved spaces on campus, allowing them to fin
 
 ### Persona 2 ###
 
+**Name:** Melisa Joakim
+
+**Background**
+
+- Architecture Student at IIT
+- Off-campus commuter
+
+**Demographics**
+
+- Age: 21
+
+**Goal:** Reliably find a space to study and work on assignments between classes and lectures.
+
+**How we can help**
+
+- Provide a platform for finding study spaces on campus
+- Allow the student to reserve a study space in advance
+- Allow the student to view an area's frequency of use
+- Provide real-time information about how busy an area of campus is
+
 ## Team Members ##
 | Name | Location | Timezone Offset |
 | ---- | -------- | --------------- |
