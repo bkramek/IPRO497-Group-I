@@ -6,14 +6,14 @@ import androidx.lifecycle.ViewModel;
 
 public class CheckInOutViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    //private final MutableLiveData<String> mText;
 
     public CheckInOutViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is Check In/Out fragment");
+        /*mText = new MutableLiveData<>();
+        mText.setValue("This is Check In/Out fragment");*/
     }
 
-    public LiveData<String> getText() {
-        return mText;
-    }
+    /*public LiveData<String> getText() {
+        //return mText;
+    }*/
 }

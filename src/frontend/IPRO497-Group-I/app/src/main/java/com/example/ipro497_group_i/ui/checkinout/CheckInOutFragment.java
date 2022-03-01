@@ -3,15 +3,18 @@ package com.example.ipro497_group_i.ui.checkinout;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
+import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
@@ -38,10 +41,8 @@ public class CheckInOutFragment extends Fragment {
 
     private void requestCamera() {
         if (ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-            System.out.println("yes1");
             startCamera();
         } else {
-            System.out.println("no1");
             if (ActivityCompat.shouldShowRequestPermissionRationale(this.getActivity(), Manifest.permission.CAMERA)) {
                 ActivityCompat.requestPermissions(this.getActivity(), new String[]{Manifest.permission.CAMERA}, PERMISSION_CAMERA);
             } else {
@@ -54,10 +55,8 @@ public class CheckInOutFragment extends Fragment {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == PERMISSION_CAMERA) {
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                System.out.println("yes2");
                 startCamera();
             } else {
-                System.out.println("no2");
                 return;
             }
         }
@@ -89,7 +88,25 @@ public class CheckInOutFragment extends Fragment {
 
         preview.setSurfaceProvider(PV.getSurfaceProvider());
 
-        Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner)this, cameraSelector, preview);
+        ImageAnalysis imgAnalysis = new ImageAnalysis.Builder()
+                .setTargetResolution(new Size(1280, 720))
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                .build();
+
+        imgAnalysis.setAnalyzer(ContextCompat.getMainExecutor(this.getContext()), new QRScanner(new QRListener() {
+            @Override
+            public void onQRCodeFound(String _qrc) {
+                String qrc = _qrc;
+                // Temporary for demo purposes, REMOVE IN FINAL PRODUCT
+                Toast.makeText(getContext(), qrc, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void qrCodeNotFound() {
+            }
+        }));
+
+        Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner)this, cameraSelector, imgAnalysis, preview);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -104,8 +121,8 @@ public class CheckInOutFragment extends Fragment {
         CPF = ProcessCameraProvider.getInstance(this.getContext());
         requestCamera();
 
-        final TextView textView = binding.textCheckInOut;
-        checkInOutViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        //final TextView textView = binding.textCheckInOut;
+        //checkInOutViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         return root;
     }
