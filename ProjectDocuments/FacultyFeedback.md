@@ -41,19 +41,23 @@ are missing acceptance criteria
 	- Benjamin is SCRUM lead
 		- Ben didn't finish story
 	- Ghaleb
-		○ Admin page and backend #26
+		- Admin page and backend #26
 	- Michael
-		○ Completed story #33 (no description)
-		○ Will work on #30
+		- Completed story #33 (no description)
+		- Will work on #30
 	- Emma (no work during Spring Break
-		○ Finish story #27 & #28 connect to backend
+		- Finish story #27 & #28 connect to backend
 	- Christopher
-		○ Not here. Travelling due to Spring Break
+		- Not here. Travelling due to Spring Break
+		- No work items assigned on the board
+		
+I notice you have a lot of high-level work items/uses stories. We call those "features", but very few work items that represent one week's worth of work for one 
+person. Most of your work items relate to presentations, not software development tasks.  Please think about what technical tasks remain and write stories that each member of the team can do.
 
 Goal for rest on the semester: presentation allowing admin users (add rooms), student registration and room reservation; stats 
 
 
-Remember the dry run demo/presentation is on 4/19 and the final class presentation is on 4/26. In addition, there is the audience choice part of the pitch competition on 4/22.![image](https://user-images.githubusercontent.com/14003228/159762688-47013371-a537-41da-b3a4-6c099f1b99fd.png)
+Remember the dry run demo/presentation is on 4/19 and the final class presentation is on 4/26. In addition, there is the audience choice part of the pitch competition on 4/22
 
 ## Week 12 - Mar 29 ##
 
