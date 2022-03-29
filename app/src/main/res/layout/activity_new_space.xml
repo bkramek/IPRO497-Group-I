@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".NewSpaceActivity">
+
+    <!--edit text for our course name-->
+    <EditText
+        android:id="@+id/idEdtRoomName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Enter Room Name" />
+
+    <!--edit text for our course description-->
+    <EditText
+        android:id="@+id/idEdtRoomDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Enter Room Description" />
+
+    <!--edit text for course description-->
+    <EditText
+        android:id="@+id/idEdtRoomDuration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Room Duration" />
+
+    <!--button for saving data to room database-->
+    <Button
+        android:id="@+id/idBtnSaveRoom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        android:text="Save your room"
+        android:textAllCaps="false" />
+
+</LinearLayout>
