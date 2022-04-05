@@ -1,10 +1,40 @@
 {
   "project_info": {
     "project_number": "159297665963",
+    "firebase_url": "https://studyroom-reservation-group-i-default-rtdb.firebaseio.com",
     "project_id": "studyroom-reservation-group-i",
     "storage_bucket": "studyroom-reservation-group-i.appspot.com"
   },
   "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:159297665963:android:fec2df72b78b64030bf0ee",
+        "android_client_info": {
+          "package_name": "MyloginApp.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "159297665963-spp0roo0l1g7g4q49if6veg221s6tcov.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2Y6K2X-7B5C7LF1n31_PNHRrBq6DDMMI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "159297665963-spp0roo0l1g7g4q49if6veg221s6tcov.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:159297665963:android:ac54e720b9f7dabb0bf0ee",
