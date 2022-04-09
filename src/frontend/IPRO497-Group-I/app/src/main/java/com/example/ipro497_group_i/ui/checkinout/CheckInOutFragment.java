@@ -3,6 +3,7 @@ package com.example.ipro497_group_i.ui.checkinout;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +50,7 @@ public class CheckInOutFragment extends Fragment {
 
     private PreviewView PV;
     private ListenableFuture<ProcessCameraProvider> CPF;
-
+    private static final String TAG = "CheckInOut";
     private static final int PERMISSION_CAMERA = 0;
     private FragmentCheckInOutBinding binding;
 
@@ -114,47 +115,49 @@ public class CheckInOutFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> resTask) {
                     if (resTask.isSuccessful()) {
-                        System.out.println("resTask successful");
+                        Log.v(TAG,"resTask successful");
                         for (QueryDocumentSnapshot document : resTask.getResult()) {
                             long currentTime = System.currentTimeMillis();
                             // Get the data for the room that the user is currently trying to check in/out of
                             Map<String, Object>[] roomData = new Map[]{null};
-                            System.out.println("Getting room: " + document.getLong("institution_id").toString() + "_" + document.getLong("room_id").toString());
+                            Log.v(TAG,"Getting room: " + document.getLong("institution_id").toString() + "_" + document.getLong("room_id").toString());
                             DocumentReference roomDoc = db.collection("rooms").document(document.getLong("institution_id").toString() + "_" + document.getLong("room_id").toString());
-                            System.out.println("Listening for document get complete");
+                            Log.v(TAG,"Listening for document get complete");
                             roomDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    System.out.println("task complete");
+                                    Log.v(TAG,"task complete");
                                     if (task.isSuccessful()) {
-                                        System.out.println("roomTask successful");
+                                        Log.v(TAG,"roomTask successful");
                                         DocumentSnapshot doc = task.getResult();
                                         if (doc.exists()) {
-                                            System.out.println("room doc exists");
+                                            Log.v(TAG, "room doc exists");
                                             roomData[0] = doc.getData();
+                                            Log.v(TAG, "got document data");
+                                            if (!document.getBoolean("checked_in") && (document.getLong("time_start") * 1000) >= currentTime - 600000) {
+                                                // Not checked in and within 10 minutes of scheduled check in time
+                                                db.collection("reservations").document(document.getId()).update("checked_in", true);
+                                                db.collection("reservations").document(document.getId()).update("check_in_time", currentTime / 1000);
+                                                Toast.makeText(getContext(), "Checked in to " + roomData[0].get("building_name") + " " + roomData[0].get("room_number"), Toast.LENGTH_SHORT).show();
+                                            } else if (document.getBoolean("checked_in") == true) {
+                                                // Already checked in, check out now
+                                                db.collection("reservations").document(document.getId()).update("checked_out", true);
+                                                db.collection("reservations").document(document.getId()).update("check_out_time", currentTime / 1000);
+                                                Log.v(TAG, "hello");
+                                                Toast.makeText(getContext(), "Checked out of " + roomData[0].get("building_name") + " " + roomData[0].get("room_number"), Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                // Not checked in, but too early to check in right now
+                                                Toast.makeText(getContext(), "Too early to check in", Toast.LENGTH_SHORT).show();
+                                            }
                                         } else {
-                                            System.out.println("room doc does NOT exist");
+                                            Log.v(TAG, "room doc does NOT exist");
                                         }
                                     } else {
-                                        System.out.println("resTask NOT successful");
+                                        Log.v(TAG, "resTask NOT successful");
                                     }
                                 }
                             });
-                            System.out.println("got document data");
-                            if (!document.getBoolean("checked_in") && (document.getLong("time_start") * 1000) >= currentTime - 600000) {
-                                // Not checked in and within 10 minutes of scheduled check in time
-                                db.collection("reservations").document(document.getId()).update("checked_in", true);
-                                db.collection("reservations").document(document.getId()).update("check_in_time", currentTime / 1000);
-                                Toast.makeText(getContext(), "Checked in to " + roomData[0].get("building_name") + " " + roomData[0].get("room_number"), Toast.LENGTH_SHORT).show();
-                            } else if (document.getBoolean("checked_in") == true) {
-                                // Already checked in, check out now
-                                db.collection("reservations").document(document.getId()).update("checked_out", true);
-                                db.collection("reservations").document(document.getId()).update("check_out_time", currentTime / 1000);
-                                Toast.makeText(getContext(), "Checked out of " + roomData[0].get("building_name") + " " + roomData[0].get("room_number"), Toast.LENGTH_SHORT).show();
-                            } else {
-                                // Not checked in, but too early to check in right now
-                                Toast.makeText(getContext(), "Too early to check in", Toast.LENGTH_SHORT).show();
-                            }
+
                         }
                     } else {
                         Toast.makeText(getContext(), "resTask not successful", Toast.LENGTH_SHORT).show();
