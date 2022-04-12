@@ -50,7 +50,7 @@ public class CheckInOutFragment extends Fragment {
 
     private PreviewView PV;
     private ListenableFuture<ProcessCameraProvider> CPF;
-
+    private static final String TAG = "CheckInOut";
     private static final int PERMISSION_CAMERA = 0;
     private FragmentCheckInOutBinding binding;
 
@@ -115,11 +115,16 @@ public class CheckInOutFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> resTask) {
                     if (resTask.isSuccessful()) {
+<<<<<<< HEAD
                         Log.v("CheckInOut", "resTask successful");
+=======
+                        Log.v(TAG,"resTask successful");
+>>>>>>> 774c9c09faf17f7e8c43ed192a2dff023ff136e6
                         for (QueryDocumentSnapshot document : resTask.getResult()) {
                             long currentTime = System.currentTimeMillis();
                             // Get the data for the room that the user is currently trying to check in/out of
                             Map<String, Object>[] roomData = new Map[]{null};
+<<<<<<< HEAD
                             Log.v("CheckInOut", "Getting room: " + document.getLong("institution_id").toString() + "_" + document.getLong("room_id").toString());
                             DocumentReference roomDoc = db.collection("rooms").document(document.getLong("institution_id").toString() + "_" + document.getLong("room_id").toString());
                             Log.v("CheckInOut", "Listening for document get complete");
@@ -134,6 +139,22 @@ public class CheckInOutFragment extends Fragment {
                                             Log.v("CheckInOut", "room doc exists");
                                             roomData[0] = doc.getData();
                                             Log.v("CheckInOut", "got document data");
+=======
+                            Log.v(TAG,"Getting room: " + document.getLong("institution_id").toString() + "_" + document.getLong("room_id").toString());
+                            DocumentReference roomDoc = db.collection("rooms").document(document.getLong("institution_id").toString() + "_" + document.getLong("room_id").toString());
+                            Log.v(TAG,"Listening for document get complete");
+                            roomDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    Log.v(TAG,"task complete");
+                                    if (task.isSuccessful()) {
+                                        Log.v(TAG,"roomTask successful");
+                                        DocumentSnapshot doc = task.getResult();
+                                        if (doc.exists()) {
+                                            Log.v(TAG, "room doc exists");
+                                            roomData[0] = doc.getData();
+                                            Log.v(TAG, "got document data");
+>>>>>>> 774c9c09faf17f7e8c43ed192a2dff023ff136e6
                                             if (!document.getBoolean("checked_in") && (document.getLong("time_start") * 1000) >= currentTime - 600000) {
                                                 // Not checked in and within 10 minutes of scheduled check in time
                                                 db.collection("reservations").document(document.getId()).update("checked_in", true);
@@ -143,16 +164,27 @@ public class CheckInOutFragment extends Fragment {
                                                 // Already checked in, check out now
                                                 db.collection("reservations").document(document.getId()).update("checked_out", true);
                                                 db.collection("reservations").document(document.getId()).update("check_out_time", currentTime / 1000);
+<<<<<<< HEAD
+=======
+                                                Log.v(TAG, "hello");
+>>>>>>> 774c9c09faf17f7e8c43ed192a2dff023ff136e6
                                                 Toast.makeText(getContext(), "Checked out of " + roomData[0].get("building_name") + " " + roomData[0].get("room_number"), Toast.LENGTH_SHORT).show();
                                             } else {
                                                 // Not checked in, but too early to check in right now
                                                 Toast.makeText(getContext(), "Too early to check in", Toast.LENGTH_SHORT).show();
                                             }
                                         } else {
+<<<<<<< HEAD
                                             Log.v("CheckInOut", "room doc does NOT exist");
                                         }
                                     } else {
                                         Log.v("CheckInOut", "resTask NOT successful");
+=======
+                                            Log.v(TAG, "room doc does NOT exist");
+                                        }
+                                    } else {
+                                        Log.v(TAG, "resTask NOT successful");
+>>>>>>> 774c9c09faf17f7e8c43ed192a2dff023ff136e6
                                     }
                                 }
                             });

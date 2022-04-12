@@ -60,8 +60,19 @@ Goal for rest on the semester: presentation allowing admin users (add rooms), st
 Remember the dry run demo/presentation is on 4/19 and the final class presentation is on 4/26. In addition, there is the audience choice part of the pitch competition on 4/22
 
 ## Week 12 - Mar 29 ##
+- Michael:  Working on #25, but transferring to a different Firebase. Was closed but reopened.  Also code cleanup #40
+- Ghaleb working on #26
+- Michael: closed on #30 (swipe left and right) and UI cleanup and integration of all the pages, this week on #32 user profiles to database
+- Chris: closed #36 and working on #37
+- Emma absent
 
 ## Week 13 - Apr 5 ##
+
+- Michal obtain data from DB (crashes) #32. Working on #40 (high priority)
+- Benjamin completed #25 (moved over on call) working on #47
+- Ghaleb finished #26 now needs to figure out how to push to Github (so it works). Start #29 (need to assign)
+- Emma: finished #43. Working on #48 on #28 (debugging of use input)
+- Christopher (mic issues)  Designed app logos #41 and working on #44
 
 ## Week 14 - Apr 12 ##
 
