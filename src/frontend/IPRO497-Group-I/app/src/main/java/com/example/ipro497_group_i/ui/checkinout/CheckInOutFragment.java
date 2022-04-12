@@ -3,6 +3,7 @@ package com.example.ipro497_group_i.ui.checkinout;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,7 +57,7 @@ public class CheckInOutFragment extends Fragment {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private void requestCamera() {
-        handleCheckInOut("inst_000001_rm_000001");
+        //handleCheckInOut("inst_000001_rm_000001");
         if (ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             startCamera();
         } else {
@@ -80,14 +81,14 @@ public class CheckInOutFragment extends Fragment {
     }
 
     private void startCamera() {
-        System.out.println("attempting to start camera");
+        Log.v("CheckInOut", "attempting to start camera");
         CPF.addListener(() -> {
             try {
                 ProcessCameraProvider cameraProvider = CPF.get();
                 bindCameraPreview(cameraProvider);
-                System.out.println("startCamera worked");
+                Log.v("CheckInOut", "startCamera worked");
             } catch (ExecutionException | InterruptedException e) {
-                System.out.println("Error starting camera " + e.getMessage());
+                Log.v("CheckInOut", "Error starting camera " + e.getMessage());
             }
         }, ContextCompat.getMainExecutor(this.getContext()));
     }
@@ -106,7 +107,7 @@ public class CheckInOutFragment extends Fragment {
             // QR code is in a valid format (inst_######_rm_######)
             String instId = qrc.substring(5, 11);
             String rmId = qrc.substring(15);
-            Toast.makeText(getContext(), "valid qr code", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "valid qr code", Toast.LENGTH_SHORT).show();
             db.collection("reservations").whereEqualTo("institution_id", Integer.parseInt(instId))
                     .whereEqualTo("room_id", Integer.parseInt(rmId))
                     .whereEqualTo("user_id", 1) // ONLY FOR TESTING PURPOSES, USE THE ACTUAL USER ID ONCE IMPLEMENTED
@@ -114,53 +115,59 @@ public class CheckInOutFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> resTask) {
                     if (resTask.isSuccessful()) {
-                        System.out.println("resTask successful");
+                        Log.v("CheckInOut", "resTask successful");
                         for (QueryDocumentSnapshot document : resTask.getResult()) {
                             long currentTime = System.currentTimeMillis();
                             // Get the data for the room that the user is currently trying to check in/out of
                             Map<String, Object>[] roomData = new Map[]{null};
-                            System.out.println("Getting room: " + document.getLong("institution_id").toString() + "_" + document.getLong("room_id").toString());
+                            Log.v("CheckInOut", "Getting room: " + document.getLong("institution_id").toString() + "_" + document.getLong("room_id").toString());
                             DocumentReference roomDoc = db.collection("rooms").document(document.getLong("institution_id").toString() + "_" + document.getLong("room_id").toString());
-                            System.out.println("Listening for document get complete");
+                            Log.v("CheckInOut", "Listening for document get complete");
                             roomDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    System.out.println("task complete");
+                                    Log.v("CheckInOut", "task complete");
                                     if (task.isSuccessful()) {
-                                        System.out.println("roomTask successful");
+                                        Log.v("CheckInOut", "roomTask successful");
                                         DocumentSnapshot doc = task.getResult();
                                         if (doc.exists()) {
-                                            System.out.println("room doc exists");
+                                            Log.v("CheckInOut", "room doc exists");
                                             roomData[0] = doc.getData();
+                                            Log.v("CheckInOut", "got document data");
+                                            if (!document.getBoolean("checked_in") && (document.getLong("time_start") * 1000) >= currentTime - 600000) {
+                                                // Not checked in and within 10 minutes of scheduled check in time
+                                                db.collection("reservations").document(document.getId()).update("checked_in", true);
+                                                db.collection("reservations").document(document.getId()).update("check_in_time", currentTime / 1000);
+                                                Toast.makeText(getContext(), "Checked in to " + roomData[0].get("building_name") + " " + roomData[0].get("room_number"), Toast.LENGTH_SHORT).show();
+                                            } else if (document.getBoolean("checked_in") == true) {
+                                                // Already checked in, check out now
+                                                db.collection("reservations").document(document.getId()).update("checked_out", true);
+                                                db.collection("reservations").document(document.getId()).update("check_out_time", currentTime / 1000);
+                                                Toast.makeText(getContext(), "Checked out of " + roomData[0].get("building_name") + " " + roomData[0].get("room_number"), Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                // Not checked in, but too early to check in right now
+                                                Toast.makeText(getContext(), "Too early to check in", Toast.LENGTH_SHORT).show();
+                                            }
                                         } else {
-                                            System.out.println("room doc does NOT exist");
+                                            Log.v("CheckInOut", "room doc does NOT exist");
                                         }
                                     } else {
-                                        System.out.println("resTask NOT successful");
+                                        Log.v("CheckInOut", "resTask NOT successful");
                                     }
                                 }
                             });
-                            System.out.println("got document data");
-                            if (!document.getBoolean("checked_in") && (document.getLong("time_start") * 1000) >= currentTime - 600000) {
-                                // Not checked in and within 10 minutes of scheduled check in time
-                                db.collection("reservations").document(document.getId()).update("checked_in", true);
-                                db.collection("reservations").document(document.getId()).update("check_in_time", currentTime / 1000);
-                                Toast.makeText(getContext(), "Checked in to " + roomData[0].get("building_name") + " " + roomData[0].get("room_number"), Toast.LENGTH_SHORT).show();
-                            } else if (document.getBoolean("checked_in") == true) {
-                                // Already checked in, check out now
-                                db.collection("reservations").document(document.getId()).update("checked_out", true);
-                                db.collection("reservations").document(document.getId()).update("check_out_time", currentTime / 1000);
-                                Toast.makeText(getContext(), "Checked out of " + roomData[0].get("building_name") + " " + roomData[0].get("room_number"), Toast.LENGTH_SHORT).show();
-                            } else {
-                                // Not checked in, but too early to check in right now
-                                Toast.makeText(getContext(), "Too early to check in", Toast.LENGTH_SHORT).show();
-                            }
+
                         }
                     } else {
                         Toast.makeText(getContext(), "resTask not successful", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         } else {
             // QR code is not in a valid format
             Toast.makeText(getContext(), "Invalid QR code, please try again", Toast.LENGTH_SHORT).show();
@@ -169,7 +176,7 @@ public class CheckInOutFragment extends Fragment {
     }
 
     private void bindCameraPreview(@NonNull ProcessCameraProvider cameraProvider) {
-        System.out.println("binding camera preview");
+        Log.v("CheckInOut", "binding camera preview");
         PV.setImplementationMode(PreviewView.ImplementationMode.PERFORMANCE);
 
         Preview preview = new Preview.Builder()
