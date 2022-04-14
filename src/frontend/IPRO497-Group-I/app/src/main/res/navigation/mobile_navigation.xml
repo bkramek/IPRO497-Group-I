@@ -21,11 +21,11 @@
         android:id="@+id/nav_gallery"
         android:name="com.example.ipro497_group_i.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/admin_page" />
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.example.ipro497_group_i.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/reservation_page" />
 </navigation>

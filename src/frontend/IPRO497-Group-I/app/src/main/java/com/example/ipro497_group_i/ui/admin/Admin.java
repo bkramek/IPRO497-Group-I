@@ -1,56 +1,41 @@
 package com.example.ipro497_group_i.ui.admin;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.camera.lifecycle.ProcessCameraProvider;
-import androidx.camera.view.PreviewView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ipro497_group_i.R;
-import com.example.ipro497_group_i.databinding.FragmentCheckInOutBinding;
-import com.example.ipro497_group_i.ui.checkinout.CheckInOutViewModel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.common.util.concurrent.ListenableFuture;
-
-import java.util.List;
+import com.example.ipro497_group_i.databinding.AdminPageBinding;
 
 public class Admin extends Fragment {
     // creating a variables for our recycler view.
     private RecyclerView RoomRV;
     private static final int ADD_ROOM_REQUEST = 1;
     private static final int EDIT_ROOM_REQUEST = 2;
-    private ViewModal viewmodal;
-    private Admin binding;
-    private View view;
-    private PreviewView PV;
+    private AdminPageBinding binding;
+    private View root;
+    private ConstraintLayout lay;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
 
-        CheckInOutViewModel checkInOutViewModel = new ViewModelProvider(this).get(CheckInOutViewModel.class);
+        //CheckInOutViewModel checkInOutViewModel = new ViewModelProvider(this).get(CheckInOutViewModel.class);
 
-        binding = FragmentCheckInOutBinding.inflate(inflater, container, false);
+        binding = AdminPageBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        PV = root.findViewById(R.id.check_in_out_previewView);
-        view = (View) inflater.inflate(R.layout.admin, container,false);
+        root = (View) inflater.inflate(R.layout.admin_page, container,false);
+        //lay= root.findViewById(R.layout.)
 
         // initializing our variable for our recycler view and fab.
-        RoomRV = findViewById(R.id.idRVrooms);
+        /*RoomRV = findViewById(R.id.idRVrooms);
         FloatingActionButton fab = findViewById(R.id.idRoomAdd);
 
         // adding on click listener for floating action button.
@@ -120,8 +105,8 @@ public class Admin extends Fragment {
                 // adding a edit course constant.
                 startActivityForResult(intent, EDIT_ROOM_REQUEST);
             }
-        });
-        return view;
+        });*/
+        return root;
     }
 /*
     @Override
@@ -130,7 +115,7 @@ public class Admin extends Fragment {
         setContentView(R.layout.admin);
 
 
-    }*/
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -158,7 +143,7 @@ public class Admin extends Fragment {
         } else {
             Toast.makeText(this, "Space not saved", Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
     @Override
     public void onDestroyView() {
         super.onDestroyView();

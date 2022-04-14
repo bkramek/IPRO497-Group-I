@@ -32,9 +32,6 @@
         <activity
             android:name=".ui.admin.Admin">
         </activity>
-        <activity
-            android:name=".ui.admin.NewSpaceActivity">
-        </activity>
 
         <activity
             android:name=".RegisterActivity">
