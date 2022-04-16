@@ -6,28 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".ui.checkinout.CheckInOutFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="1000px"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="143dp"
-        android:layout_marginEnd="72dp"
+    <androidx.camera.view.PreviewView
+        android:id="@+id/check_in_out_previewView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".MainActivity">
+        app:layout_constraintVertical_bias="0.0">
 
-        <androidx.camera.view.PreviewView
-            android:id="@+id/check_in_out_previewView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.camera.view.PreviewView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <FrameLayout
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:background="@drawable/qr_square"
+        android:clickable="false"
+        app:layout_constraintBottom_toBottomOf="@+id/check_in_out_previewView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!--<TextView
         android:id="@+id/text_check_in_out"

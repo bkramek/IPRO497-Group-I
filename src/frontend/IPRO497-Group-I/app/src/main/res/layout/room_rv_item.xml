@@ -29,7 +29,7 @@
 
         <!--text view for our course description-->
         <TextView
-            android:id="@+id/room"
+            android:id="@+id/roomy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"

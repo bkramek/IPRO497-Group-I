@@ -12,13 +12,13 @@ buildscript {
         // Add the dependency for the Performance Monitoring plugin
         classpath 'com.google.firebase:perf-plugin:1.4.1'  // Performance Monitoring plugin
 
-
     }
 }
 
 plugins {
     id 'com.android.application' version '7.1.2' apply false
     id 'com.android.library' version '7.1.2' apply false
+
 }
 
 task clean(type: Delete) {

@@ -27,7 +27,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    int slide;
+
+    private static int slide;
     boolean admin = false;
     FirebaseDatabase db;
     BottomNavigationView bottomNavigationView;
@@ -53,11 +54,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.home);
-        slide = 2;
+
+        /*slide = 2;
 
         ConstraintLayout relativeLayout = (ConstraintLayout) findViewById(R.id.container);
         if(admin){
-            relativeLayout.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
+            relativeLayout.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this){
             /*public void onSwipeBottom() {
                 Toast.makeText(MainActivity.this, "top", Toast.LENGTH_SHORT).show();
 
@@ -69,8 +71,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                         slide = 3;
                     }
 
-            }*/
-
+            }
+                @Override
                 public void onSwipeRight() {
                     //Toast.makeText(MainActivity.this, "right", Toast.LENGTH_SHORT).show();
                     if(slide == 2){
@@ -88,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                         slide = 2;
                     }
                 }
+                @Override
                 public void onSwipeLeft() {
                     //Toast.makeText(MainActivity.this, "left", Toast.LENGTH_SHORT).show();
                     if(slide == 2) {
@@ -108,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             });
         }if(!admin){
             relativeLayout.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
-
+                @Override
                 public void onSwipeRight() {
                     //Toast.makeText(MainActivity.this, "right", Toast.LENGTH_SHORT).show();
                     if(slide == 2){
@@ -126,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                         slide = 2;
                     }
                 }
+                @Override
                 public void onSwipeLeft() {
                     //Toast.makeText(MainActivity.this, "left", Toast.LENGTH_SHORT).show();
                     if(slide == 2) {
@@ -143,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                     }
                 }
 
-            });
+            });*/
         }
 
         /*
@@ -182,7 +186,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                         // Failed to read value
                         Log.w(TAG, "Failed to read value.", error.toException());
                     }*/
-    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -204,6 +207,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 return true;
         }
         return false;
+    }
+
+    public static void setSlide(int num){
+        slide = num;
     }
 }
 

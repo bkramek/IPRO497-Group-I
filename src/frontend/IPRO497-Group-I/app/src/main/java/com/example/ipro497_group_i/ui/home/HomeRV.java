@@ -13,7 +13,7 @@ import com.example.ipro497_group_i.ui.LocData;
 import java.util.ArrayList;
 
 public class HomeRV extends RecyclerView.Adapter<HomeRV.ViewHolder>{
-    private ArrayList<LocData> locDataArrayList = new ArrayList<LocData>();
+    private ArrayList<LocData> locDataArrayList = new ArrayList<>();
     private RoomListener roomListener;
     public CardView cv;
 
@@ -46,7 +46,7 @@ public class HomeRV extends RecyclerView.Adapter<HomeRV.ViewHolder>{
         ImageView roomLook;
         RoomListener roomListener;
 
-        public ViewHolder(@NonNull View item, RoomListener officialListener) {
+        public ViewHolder(@NonNull View item, RoomListener roomListener) {
             super(item);
             // initializing each view of our recycler view.
             room = item.findViewById(R.id.room);

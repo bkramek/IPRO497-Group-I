@@ -2,6 +2,6 @@
 
     <style name="Widget.Theme.IPRO497GroupI.MyView" parent="">
         <item name="android:background">@color/gray_400</item>
-        <item name="exampleColor">@color/light_blue_400</item>
+        <item name="exampleColor">#FF04BA80</item>
     </style>
 </resources>

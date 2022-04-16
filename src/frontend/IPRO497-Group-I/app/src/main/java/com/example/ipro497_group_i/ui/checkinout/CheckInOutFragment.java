@@ -107,7 +107,7 @@ public class CheckInOutFragment extends Fragment {
             // QR code is in a valid format (inst_######_rm_######)
             String instId = qrc.substring(5, 11);
             String rmId = qrc.substring(15);
-            Toast.makeText(getContext(), "valid qr code", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "valid qr code", Toast.LENGTH_SHORT).show();
             db.collection("reservations").whereEqualTo("institution_id", Integer.parseInt(instId))
                     .whereEqualTo("room_id", Integer.parseInt(rmId))
                     .whereEqualTo("user_id", 1) // ONLY FOR TESTING PURPOSES, USE THE ACTUAL USER ID ONCE IMPLEMENTED
@@ -138,16 +138,16 @@ public class CheckInOutFragment extends Fragment {
                                                 // Not checked in and within 10 minutes of scheduled check in time
                                                 db.collection("reservations").document(document.getId()).update("checked_in", true);
                                                 db.collection("reservations").document(document.getId()).update("check_in_time", currentTime / 1000);
-                                                Toast.makeText(getContext(), "Checked in to " + roomData[0].get("building_name") + " " + roomData[0].get("room_number"), Toast.LENGTH_SHORT).show();
+                                                //Toast.makeText(getContext(), "Checked in to " + roomData[0].get("building_name") + " " + roomData[0].get("room_number"), Toast.LENGTH_SHORT).show();
                                             } else if (document.getBoolean("checked_in") == true) {
                                                 // Already checked in, check out now
                                                 db.collection("reservations").document(document.getId()).update("checked_out", true);
                                                 db.collection("reservations").document(document.getId()).update("check_out_time", currentTime / 1000);
                                                 Log.v(TAG, "hello");
-                                                Toast.makeText(getContext(), "Checked out of " + roomData[0].get("building_name") + " " + roomData[0].get("room_number"), Toast.LENGTH_SHORT).show();
+                                                //Toast.makeText(getContext(), "Checked out of " + roomData[0].get("building_name") + " " + roomData[0].get("room_number"), Toast.LENGTH_SHORT).show();
                                             } else {
                                                 // Not checked in, but too early to check in right now
-                                                Toast.makeText(getContext(), "Too early to check in", Toast.LENGTH_SHORT).show();
+                                                //Toast.makeText(getContext(), "Too early to check in", Toast.LENGTH_SHORT).show();
                                             }
                                         } else {
                                             Log.v(TAG, "room doc does NOT exist");
@@ -160,13 +160,13 @@ public class CheckInOutFragment extends Fragment {
 
                         }
                     } else {
-                        Toast.makeText(getContext(), "resTask not successful", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(), "resTask not successful", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         } else {
             // QR code is not in a valid format
-            Toast.makeText(getContext(), "Invalid QR code, please try again", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "Invalid QR code, please try again", Toast.LENGTH_SHORT).show();
         }
         handlingQRC = false;
     }

@@ -1,32 +1,68 @@
 package com.example.ipro497_group_i.ui.home;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.NumberPicker;
+import android.widget.ScrollView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ipro497_group_i.MainActivity;
 import com.example.ipro497_group_i.R;
 import com.example.ipro497_group_i.databinding.FragmentHomeBinding;
+import com.example.ipro497_group_i.ui.CustomTimePickerDialog;
 import com.example.ipro497_group_i.ui.LocData;
+import com.example.ipro497_group_i.ui.OnSwipeTouchListener;
+import com.example.ipro497_group_i.ui.checkinout.CheckInOutFragment;
+import com.example.ipro497_group_i.ui.gallery.GalleryFragment;
+import com.example.ipro497_group_i.ui.slideshow.ReserveData;
+import com.example.ipro497_group_i.ui.slideshow.SlideshowFragment;
+import com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker;
+import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.text.BreakIterator;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class HomeFragment extends Fragment implements HomeRV.RoomListener{
 
+    Calendar date;
+
+    CheckInOutFragment qrFrag = new CheckInOutFragment();
+    SlideshowFragment reserveFrag = new SlideshowFragment();
+    BottomNavigationView bottomNavigationView;
     private FragmentHomeBinding binding;
     private EditText search;
     HomeRV adapter;
     private RecyclerView listRV;
     private ArrayList<LocData> locDataArrayList = new ArrayList<LocData>();
 
+    @SuppressLint("ClickableViewAccessibility")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
@@ -87,7 +123,6 @@ public class HomeFragment extends Fragment implements HomeRV.RoomListener{
                 filter(s.toString());
                 // TODO Auto-generated method stub
             }
-
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -102,9 +137,6 @@ public class HomeFragment extends Fragment implements HomeRV.RoomListener{
                 //you can use runnable postDelayed like 500 ms to delay search text
             }
         });
-        
-
-
 
         return root;
     }
@@ -112,17 +144,81 @@ public class HomeFragment extends Fragment implements HomeRV.RoomListener{
     @Override
     public void onRoomClick(int position) {
         locDataArrayList.get(position);
+        /*
+        int hour = 0;
+        int minute = 0;
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
+                new TimePickerDialog.OnTimeSetListener() {
 
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        String t = hourOfDay + ":" + minute;
+                        String d = "April 16, 2021";
+                        String b = locDataArrayList.get(position).getBuilding();
+                        String r = locDataArrayList.get(position).getRoom();
+                        ReserveData data = new ReserveData(t, d, b, r);
+                        reserveFrag.addElement(data);
+                    }
+                }, hour, minute, false);
+        timePickerDialog.show();
+
+        Calendar mcurrentTime = Calendar.getInstance();
+        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+        int minute = mcurrentTime.get(Calendar.MINUTE);
+        CustomTimePickerDialog mTimePicker;
+        mTimePicker = new CustomTimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                //tv.setText( selectedHour + ":" + selectedMinute);
+                String t = selectedHour + ":" + selectedMinute;
+                String d = String.valueOf(mcurrentTime.get(Calendar.DATE));
+                String b = locDataArrayList.get(position).getBuilding();
+                String r = locDataArrayList.get(position).getRoom();
+                ReserveData data = new ReserveData(t, d, b, r);
+                reserveFrag.addElement(data);
+            }
+        }, hour, minute, false);
+        mTimePicker.setTitle("Select Time");
+        mTimePicker.show();
+        //showDateTimePicker();*/
+        new SingleDateAndTimePickerDialog.Builder(getContext())
+                .backgroundColor(Color.WHITE)
+                .mainColor(Color.DKGRAY)
+                .titleTextColor(Color.WHITE)
+                //.bottomSheet()
+                //.curved()
+                //.stepSizeMinutes(15)
+                //.displayHours(false)
+                .displayMinutes(false)
+                //.todayText("aujourd'hui")
+                .displayListener(new SingleDateAndTimePickerDialog.DisplayListener() {
+                    @Override
+                    public void onDisplayed(SingleDateAndTimePicker picker) {
+                        // Retrieve the SingleDateAndTimePicker
+                    }
+
+                    public void onClosed(SingleDateAndTimePicker picker) {
+                        // On dialog closed
+                    }
+                })
+                .title("Choose Date and Time")
+                .listener(new SingleDateAndTimePickerDialog.Listener() {
+                    @Override
+                    public void onDateSelected(Date date) {
+
+                    }
+                }).display();
     }
 
     public class OnItemClickListener {
     }
+
     void filter(String text){
         ArrayList<LocData> temp = new ArrayList();
         for(LocData d: locDataArrayList){
             //or use .equal(text) with you want equal match
             //use .toLowerCase() for better matches
-            if(d.getBuilding().contains(text)){
+            if(d.getBuilding().toLowerCase().contains(text)){
                 temp.add(d);
             }
         }

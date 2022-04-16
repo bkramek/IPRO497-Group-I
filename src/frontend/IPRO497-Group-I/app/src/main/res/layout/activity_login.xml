@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="#303030"
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/signin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/signin"
+        android:layout_margin="50dp"
+        android:gravity="center"
         android:text="Sign in"
         android:textColor="@color/white"
         android:textSize="35dp"
-        android:textStyle="bold"
-        android:layout_margin="50dp"
-        android:gravity="center"/>
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/username"
@@ -64,8 +64,9 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/teal_200"
-        android:text="LOGIN" />
+        android:backgroundTint="#30ffffff"
+        android:text="LOGIN"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/forgotpass"
@@ -81,12 +82,13 @@
         android:textColor="@color/white" />
 
     <TextView
+        android:id="@+id/others"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/others"
         android:layout_above="@id/socialicons"
+        android:layout_centerHorizontal="true"
         android:text="or sign in with"
-        android:layout_centerHorizontal="true"/>
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/register"
@@ -100,30 +102,33 @@
         android:layout_marginBottom="20dp"
         android:text="Register"
         android:textColor="@color/white" />
+
     <LinearLayout
+        android:id="@+id/socialicons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/socialicons"
         android:layout_alignParentBottom="true"
         android:gravity="center">
 
 
         <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="20dp"
             android:id="@+id/google_btn"
-            android:src="@drawable/google"/>
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/google" />
+
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="20dp"
-            android:src="@drawable/fb"/>
+            android:src="@drawable/fb" />
+
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="20dp"
-            android:src="@drawable/twitter"/>
+            android:src="@drawable/twitter" />
 
     </LinearLayout>
 
