@@ -5,8 +5,8 @@ import android.view.MenuItem;
 import android.view.Menu;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
+import com.example.ipro497_group_i.databinding.ActivityMainBinding;
 import com.example.ipro497_group_i.ui.OnSwipeTouchListener;
 import com.example.ipro497_group_i.ui.checkinout.CheckInOutFragment;
 import com.example.ipro497_group_i.ui.gallery.GalleryFragment;
@@ -14,13 +14,10 @@ import com.example.ipro497_group_i.ui.home.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.FirebaseDatabase;
-
-import com.example.ipro497_group_i.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     int slide;
