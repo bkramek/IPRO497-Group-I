@@ -1,7 +1,9 @@
 package com.example.ipro497_group_i;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.Menu;
 import android.widget.EditText;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     HomeFragment homeFrag = new HomeFragment();
     GalleryFragment adminFrag = new GalleryFragment();
     SlideshowFragment reserveFrag = new SlideshowFragment();
+    String TAG = "MainActivity";
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -53,6 +56,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottom_bar);
+
+        Intent intent = getIntent();
+        Long username = intent.getLongExtra("userId", 0);
+        Log.d(TAG, ""+username);
+
         admin = false;
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 

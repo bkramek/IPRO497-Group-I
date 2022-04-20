@@ -32,9 +32,10 @@ import com.google.common.hash.Hashing;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements Serializable {
 
     private final String TAG = "LoginActivity";
 
@@ -84,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Log.v(TAG, "Login failed: username and password do not match.");
                                         errorPopup("Login failed!", "The username and password do not match.");
                                     } else {
-                                        Intent intent = new Intent(getBaseContext(), HomeFragment.class);
+                                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
                                         intent.putExtra("userId", task.getResult().getDocuments().get(0).getLong("user_id"));
                                         startActivity(intent);
                                     }
