@@ -17,7 +17,7 @@
 
         <!--text view for our course name-->
         <TextView
-            android:id="@+id/idTVRoomName"
+            android:id="@+id/build"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
@@ -26,8 +26,10 @@
             android:textSize="15sp" />
 
         <!--text view for our course duration-->
+
+        <!--text view for our course description-->
         <TextView
-            android:id="@+id/idTVRoomDuration"
+            android:id="@+id/roomy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
@@ -35,9 +37,8 @@
             android:textColor="@color/black"
             android:textSize="15sp" />
 
-        <!--text view for our course description-->
         <TextView
-            android:id="@+id/idTVRoomDescription"
+            android:id="@+id/time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"

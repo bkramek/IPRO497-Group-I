@@ -26,28 +26,40 @@
         <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.191" />
         <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.191" />
         <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/drawable/ic_baseline_person_outline_24.xml" value="0.1495" />
+        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/drawable/ic_check.xml" value="0.1" />
+        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/drawable/ic_home.xml" value="0.1" />
         <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/drawable/ic_launcher_background.xml" value="0.218" />
         <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/drawable/ic_menu_camera.xml" value="0.1325" />
         <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.1325" />
         <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.1325" />
+        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/drawable/ic_qr.xml" value="0.1615" />
+        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/drawable/id_search.xml" value="0.287" />
+        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/drawable/qr_square.xml" value="0.1815" />
+        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/drawable/rounded.xml" value="0.1" />
         <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/drawable/side_nav_bar.xml" value="0.1325" />
-        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/activity_main.xml" value="0.3104166666666667" />
         <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/activity_new_space.xml" value="0.22962962962962963" />
         <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/activity_register.xml" value="0.22962962962962963" />
-        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/admin.xml" value="0.22962962962962963" />
+        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/admin.xml" value="0.33" />
+        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/admin_page.xml" value="0.4601851851851852" />
         <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/app_bar_main.xml" value="0.3104166666666667" />
-        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/bottom_bar.xml" value="0.35" />
+        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/bottom_bar.xml" value="0.2612359550561798" />
         <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/content_main.xml" value="0.3104166666666667" />
-        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/fragment_check_in_out.xml" value="0.33" />
+        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/date_time_picker.xml" value="0.37037037037037035" />
+        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/fragment_check_in_out.xml" value="0.22" />
         <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/fragment_gallery.xml" value="0.3104166666666667" />
-        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/fragment_home.xml" value="0.3104166666666667" />
+        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/fragment_slideshow.xml" value="0.3104166666666667" />
         <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/nav_header_main.xml" value="0.3104166666666667" />
-        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/new_main.xml" value="0.5489583333333333" />
-        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/room_rv_item.xml" value="0.22962962962962963" />
+        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/new_main.xml" value="0.5" />
+        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/number_picker_dialog.xml" value="0.30833333333333335" />
+        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/reservation_page.xml" value="0.33" />
+        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/room_rv_item.xml" value="0.33" />
+        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/rv_reserve.xml" value="0.35240963855421686" />
+        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/layout/rv_search.xml" value="0.3738019169329074" />
         <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/menu/activity_main_drawer.xml" value="0.3104166666666667" />
-        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/menu/bottom_nav_menu.xml" value="0.43125" />
+        <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
         <entry key="..\:/Users/Michal/AndroidStudioProjects/IPRO497-Group-I/app/src/main/res/menu/main.xml" value="0.3104166666666667" />
       </map>
     </option>

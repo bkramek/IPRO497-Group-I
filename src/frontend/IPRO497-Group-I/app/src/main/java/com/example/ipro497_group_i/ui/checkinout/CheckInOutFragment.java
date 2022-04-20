@@ -135,6 +135,7 @@ public class CheckInOutFragment extends Fragment {
                                             Log.v(TAG, "room doc exists");
                                             roomData[0] = doc.getData();
                                             Log.v(TAG, "got document data");
+
                                             Log.v(TAG, "Getting room: " + document.getLong("institution_id").toString() + "_" + document.getLong("room_id").toString());
                                             DocumentReference roomDoc = db.collection("rooms").document(document.getLong("institution_id").toString() + "_" + document.getLong("room_id").toString());
                                             Log.v(TAG, "Listening for document get complete");
@@ -181,6 +182,7 @@ public class CheckInOutFragment extends Fragment {
                                 }
                             });
                         }
+
                     }
                 }
             });
