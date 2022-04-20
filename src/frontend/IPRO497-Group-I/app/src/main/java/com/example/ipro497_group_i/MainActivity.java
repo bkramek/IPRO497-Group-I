@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+
+import com.example.ipro497_group_i.databinding.ActivityMainBinding;
 import com.example.ipro497_group_i.ui.OnSwipeTouchListener;
 import com.example.ipro497_group_i.ui.checkinout.CheckInOutFragment;
 import com.example.ipro497_group_i.ui.gallery.GalleryFragment;
@@ -18,8 +20,10 @@ import com.example.ipro497_group_i.ui.slideshow.SlideshowFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentTransaction;
+
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -54,138 +58,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.home);
-
-        /*slide = 2;
-
-        ConstraintLayout relativeLayout = (ConstraintLayout) findViewById(R.id.container);
-        if(admin){
-            relativeLayout.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this){
-            /*public void onSwipeBottom() {
-                Toast.makeText(MainActivity.this, "top", Toast.LENGTH_SHORT).show();
-
-                    if(admin){
-
-                    }else{
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, reserveFrag).commit();
-                        bottomNavigationView.setSelectedItemId(R.id.reserve);
-                        slide = 3;
-                    }
-
-            }
-                @Override
-                public void onSwipeRight() {
-                    //Toast.makeText(MainActivity.this, "right", Toast.LENGTH_SHORT).show();
-                    if(slide == 2){
-                        //getSupportFragmentManager().beginTransaction().setCustomAnimations( R.anim.slide_out_left, R.anim.slide_out_right).replace(R.id.container, qrFrag).commit();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, qrFrag).commit();
-                        bottomNavigationView.setSelectedItemId(R.id.scan);
-                        slide = 1;
-                    }
-                    if(slide == 1){
-
-                    }
-                    if(slide == 3){
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFrag).commit();
-                        bottomNavigationView.setSelectedItemId(R.id.home);
-                        slide = 2;
-                    }
-                }
-                @Override
-                public void onSwipeLeft() {
-                    //Toast.makeText(MainActivity.this, "left", Toast.LENGTH_SHORT).show();
-                    if(slide == 2) {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, reserveFrag).commit();
-                        bottomNavigationView.setSelectedItemId(R.id.reserve);
-                        slide = 3;
-                    }
-                    if(slide == 3){
-
-                    }
-                    if(slide == 1){
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFrag).commit();
-                        bottomNavigationView.setSelectedItemId(R.id.home);
-                        slide = 2;
-                    }
-                }
-
-            });
-        }if(!admin){
-            relativeLayout.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
-                @Override
-                public void onSwipeRight() {
-                    //Toast.makeText(MainActivity.this, "right", Toast.LENGTH_SHORT).show();
-                    if(slide == 2){
-                        //getSupportFragmentManager().beginTransaction().setCustomAnimations( R.anim.slide_out_left, R.anim.slide_out_right).replace(R.id.container, qrFrag).commit();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, qrFrag).commit();
-                        bottomNavigationView.setSelectedItemId(R.id.scan);
-                        slide = 1;
-                    }
-                    if(slide == 1){
-
-                    }
-                    if(slide == 3){
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFrag).commit();
-                        bottomNavigationView.setSelectedItemId(R.id.home);
-                        slide = 2;
-                    }
-                }
-                @Override
-                public void onSwipeLeft() {
-                    //Toast.makeText(MainActivity.this, "left", Toast.LENGTH_SHORT).show();
-                    if(slide == 2) {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, reserveFrag).commit();
-                        bottomNavigationView.setSelectedItemId(R.id.reserve);
-                        slide = 3;
-                    }
-                    if(slide == 3){
-
-                    }
-                    if(slide == 1){
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFrag).commit();
-                        bottomNavigationView.setSelectedItemId(R.id.home);
-                        slide = 2;
-                    }
-                }
-
-            });*/
         }
-
-        /*
-        Data data = new Data();
-        db = FirebaseDatabase.getInstance();
-        DatabaseReference bruh = db.getReference("Data");
-
-        age = findViewById(R.id.age);
-        time = findViewById(R.id.date);
-
-        @Override
-        public void onClick(View view) {
-
-            int old = Integer.parseInt(age.getText().toString().trim());
-            int peepNum = Integer.parseInt(time.getText().toString().trim());
-
-            //data.setName(text_home.getText());
-            data.setAge(old);
-            data.setNum(peepNum);
-
-            bruh.setValue(data);
-            Snackbar.make(view, "Data Sent To DataBase", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-
-                bruh.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // This method is called once with the initial value and again
-                        // whenever data at this location is updated.
-                        String value = dataSnapshot.getValue(String.class);
-                        Log.d(TAG, "Value is: " + value);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-                        // Failed to read value
-                        Log.w(TAG, "Failed to read value.", error.toException());
-                    }*/
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
