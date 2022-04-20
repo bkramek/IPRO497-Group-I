@@ -38,5 +38,6 @@
             android:theme="@style/Theme.IPRO497GroupI.NoActionBar">
         </activity>
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>

@@ -21,28 +21,33 @@ import com.example.ipro497_group_i.ui.home.HomeFragment;
 import com.example.ipro497_group_i.ui.slideshow.SlideshowFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+
 import androidx.annotation.NonNull;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentTransaction;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-
+    private DataBaseViewModal viewModel;
     private static int slide;
     boolean admin = false;
-    FirebaseDatabase db;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     BottomNavigationView bottomNavigationView;
     CheckInOutFragment qrFrag = new CheckInOutFragment();
     HomeFragment homeFrag = new HomeFragment();
     GalleryFragment adminFrag = new GalleryFragment();
     SlideshowFragment reserveFrag = new SlideshowFragment();
     String TAG = "MainActivity";
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -57,9 +62,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottom_bar);
 
+        viewModel = new ViewModelProvider(this).get(DataBaseViewModal.class);
+
         Intent intent = getIntent();
         Long username = intent.getLongExtra("userId", 0);
         Log.d(TAG, ""+username);
+
+
+        viewModel.setMyUserId(username);
 
         admin = false;
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -90,9 +100,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return false;
     }
 
-    public static void setSlide(int num){
-        slide = num;
-    }
 }
 
 

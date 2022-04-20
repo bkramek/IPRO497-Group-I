@@ -12,7 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#434343"
+        android:background="#333B61"
         android:orientation="horizontal">
 
         <LinearLayout

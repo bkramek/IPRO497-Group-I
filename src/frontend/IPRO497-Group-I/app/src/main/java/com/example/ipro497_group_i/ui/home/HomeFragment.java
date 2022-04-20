@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,10 +26,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ipro497_group_i.DataBaseViewModal;
 import com.example.ipro497_group_i.MainActivity;
 import com.example.ipro497_group_i.R;
 import com.example.ipro497_group_i.databinding.FragmentHomeBinding;
@@ -51,8 +54,10 @@ import java.util.GregorianCalendar;
 
 public class HomeFragment extends Fragment implements HomeRV.RoomListener{
 
+    private static final String TAG = "Home Frag";
     Calendar date;
-
+    private DataBaseViewModal viewModel;
+    private Long userId;
     CheckInOutFragment qrFrag = new CheckInOutFragment();
     SlideshowFragment reserveFrag = new SlideshowFragment();
     BottomNavigationView bottomNavigationView;
@@ -62,11 +67,23 @@ public class HomeFragment extends Fragment implements HomeRV.RoomListener{
     private RecyclerView listRV;
     private ArrayList<LocData> locDataArrayList = new ArrayList<LocData>();
 
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        viewModel = new ViewModelProvider(requireActivity()).get(DataBaseViewModal.class);
+
+        userId = viewModel.getMyUserId();
+        viewModel.setMyUserId(userId);
+        Log.d(TAG, ""+userId);
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+
 
 
         //Filler Data for Video
@@ -144,46 +161,10 @@ public class HomeFragment extends Fragment implements HomeRV.RoomListener{
     @Override
     public void onRoomClick(int position) {
         locDataArrayList.get(position);
-        /*
-        int hour = 0;
-        int minute = 0;
-        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
-                new TimePickerDialog.OnTimeSetListener() {
 
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        String t = hourOfDay + ":" + minute;
-                        String d = "April 16, 2021";
-                        String b = locDataArrayList.get(position).getBuilding();
-                        String r = locDataArrayList.get(position).getRoom();
-                        ReserveData data = new ReserveData(t, d, b, r);
-                        reserveFrag.addElement(data);
-                    }
-                }, hour, minute, false);
-        timePickerDialog.show();
-
-        Calendar mcurrentTime = Calendar.getInstance();
-        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-        int minute = mcurrentTime.get(Calendar.MINUTE);
-        CustomTimePickerDialog mTimePicker;
-        mTimePicker = new CustomTimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                //tv.setText( selectedHour + ":" + selectedMinute);
-                String t = selectedHour + ":" + selectedMinute;
-                String d = String.valueOf(mcurrentTime.get(Calendar.DATE));
-                String b = locDataArrayList.get(position).getBuilding();
-                String r = locDataArrayList.get(position).getRoom();
-                ReserveData data = new ReserveData(t, d, b, r);
-                reserveFrag.addElement(data);
-            }
-        }, hour, minute, false);
-        mTimePicker.setTitle("Select Time");
-        mTimePicker.show();
-        //showDateTimePicker();*/
         new SingleDateAndTimePickerDialog.Builder(getContext())
                 .backgroundColor(Color.WHITE)
-                .mainColor(Color.DKGRAY)
+                .mainColor(Color.BLUE)
                 .titleTextColor(Color.WHITE)
                 //.bottomSheet()
                 //.curved()
