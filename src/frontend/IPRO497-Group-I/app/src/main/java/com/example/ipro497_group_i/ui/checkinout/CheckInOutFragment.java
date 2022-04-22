@@ -1,6 +1,7 @@
 package com.example.ipro497_group_i.ui.checkinout;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
@@ -56,6 +58,21 @@ public class CheckInOutFragment extends Fragment {
     private FragmentCheckInOutBinding binding;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    public void errorPopup(String title, String msg) {
+        AlertDialog.Builder aDBuilder = new AlertDialog.Builder(getContext());
+        aDBuilder.setTitle(title);
+        aDBuilder.setMessage(msg);
+        aDBuilder.setIcon(R.drawable.ic_baseline_email_24);
+        aDBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        AlertDialog alertDialog = aDBuilder.create();
+        alertDialog.show();
+    }
 
     private void requestCamera() {
         if (ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
@@ -150,20 +167,25 @@ public class CheckInOutFragment extends Fragment {
                                                             Log.v(TAG, "room doc exists");
                                                             roomData[0] = doc.getData();
                                                             Log.v(TAG, "got document data");
-                                                            if (!document.getBoolean("checked_in") && (document.getLong("time_start") * 1000) >= currentTime - 600000) {
+                                                            if (!document.getBoolean("checked_in") && currentTime >= ((document.getLong("time_start") - 600) * 1000)) {
                                                                 // Not checked in and within 10 minutes of scheduled check in time
                                                                 db.collection("reservations").document(document.getId()).update("checked_in", true);
                                                                 db.collection("reservations").document(document.getId()).update("check_in_time", currentTime / 1000);
-                                                                Toast.makeText(getContext(), "Checked in to " + roomData[0].get("building_name") + " " + roomData[0].get("room_number"), Toast.LENGTH_SHORT).show();
-                                                            } else if (document.getBoolean("checked_in") == true) {
+                                                                //Toast.makeText(getContext(), "Checked in to " + roomData[0].get("building_name") + " " + roomData[0].get("room_number"), Toast.LENGTH_SHORT).show();
+                                                                errorPopup("Check In Successful!", "Successfully checked in to " + roomData[0].get("building_name") + " " + roomData[0].get("room_number"));
+                                                            } else if (document.getBoolean("checked_in") && !document.getBoolean("checked_out")) {
                                                                 // Already checked in, check out now
                                                                 db.collection("reservations").document(document.getId()).update("checked_out", true);
                                                                 db.collection("reservations").document(document.getId()).update("check_out_time", currentTime / 1000);
                                                                 Log.v(TAG, "hello");
-                                                                Toast.makeText(getContext(), "Checked out of " + roomData[0].get("building_name") + " " + roomData[0].get("room_number"), Toast.LENGTH_SHORT).show();
+                                                                //Toast.makeText(getContext(), "Checked out of " + roomData[0].get("building_name") + " " + roomData[0].get("room_number"), Toast.LENGTH_SHORT).show();
+                                                                errorPopup("Check Out Successful!", "Successfully checked out of " + roomData[0].get("building_name") + " " + roomData[0].get("room_number"));
+                                                            } else if (document.getBoolean("checked_in") && document.getBoolean("checked_out")) {
+                                                                errorPopup("Reservation Not Found!", "Sorry, you don't have a current reservation for this room.");
                                                             } else {
                                                                 // Not checked in, but too early to check in right now
-                                                                Toast.makeText(getContext(), "Too early to check in", Toast.LENGTH_SHORT).show();
+                                                                //Toast.makeText(getContext(), "Too early to check in", Toast.LENGTH_SHORT).show();
+                                                                errorPopup("Too Early to Check In", "Sorry, the earliest you can check in is 10 minutes before your reserved time.");
                                                             }
                                                         } else {
                                                             Log.v(TAG, "room doc does NOT exist");

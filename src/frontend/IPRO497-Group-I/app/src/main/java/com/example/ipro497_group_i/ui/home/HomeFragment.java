@@ -1,7 +1,6 @@
 package com.example.ipro497_group_i.ui.home;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -25,6 +24,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -44,17 +44,26 @@ import com.example.ipro497_group_i.ui.slideshow.ReserveData;
 import com.example.ipro497_group_i.ui.slideshow.SlideshowFragment;
 import com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker;
 import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HomeFragment extends Fragment implements HomeRV.RoomListener{
 
-    private static final String TAG = "Home Frag";
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    private static final String TAG = "HomeFrag";
     Calendar date;
     private DataBaseViewModal viewModel;
     private Long userId;
@@ -67,6 +76,21 @@ public class HomeFragment extends Fragment implements HomeRV.RoomListener{
     private RecyclerView listRV;
     private ArrayList<LocData> locDataArrayList = new ArrayList<LocData>();
 
+    public void errorPopup(String title, String msg) {
+        androidx.appcompat.app.AlertDialog.Builder aDBuilder = new androidx.appcompat.app.AlertDialog.Builder(getContext());
+        aDBuilder.setTitle(title);
+        aDBuilder.setMessage(msg);
+        aDBuilder.setIcon(R.drawable.ic_baseline_email_24);
+        aDBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        AlertDialog alertDialog = aDBuilder.create();
+        alertDialog.show();
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -74,7 +98,7 @@ public class HomeFragment extends Fragment implements HomeRV.RoomListener{
 
         userId = viewModel.getMyUserId();
         viewModel.setMyUserId(userId);
-        Log.d(TAG, ""+userId);
+        Log.d(TAG, "User ID: "+userId);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -83,11 +107,8 @@ public class HomeFragment extends Fragment implements HomeRV.RoomListener{
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-
-
-
         //Filler Data for Video
-        locDataArrayList.add(new LocData("Ed Kaplan Building", "105", "Small, quiet, private study room"));
+        /*locDataArrayList.add(new LocData("Ed Kaplan Building", "105", "Small, quiet, private study room"));
         locDataArrayList.add(new LocData("Ed Kaplan Building", "105", "Small, quiet, private study room"));
         locDataArrayList.add(new LocData("Ed Kaplan Building", "107", "Large, collaborative room"));
         locDataArrayList.add(new LocData("Ed Kaplan Building", "201", "Large, collaborative room"));
@@ -122,15 +143,35 @@ public class HomeFragment extends Fragment implements HomeRV.RoomListener{
         locDataArrayList.add(new LocData("Stuart Building", "204", "Small, quiet, private study room"));
         locDataArrayList.add(new LocData("Stuart Building", "105", "Large, collaborative room"));
         locDataArrayList.add(new LocData("Wishnick Hall", "315", "Small, quiet, private study room"));
-        locDataArrayList.add(new LocData("Wishnick Hall", "206", "Small, quiet, private study room"));
+        locDataArrayList.add(new LocData("Wishnick Hall", "206", "Small, quiet, private study room"));*/
+
+        adapter = new HomeRV(locDataArrayList, this);
+
+        db.collection("rooms").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot doc : task.getResult()) {
+                        if (locDataArrayList.size() < task.getResult().size()) {
+                            locDataArrayList.add(new LocData(
+                                    doc.getString("building_name"),
+                                    doc.getString("room_number"),
+                                    doc.getString("room_description")
+                            ));
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+
 
         listRV = (RecyclerView) root.findViewById(R.id.rv_home);
         listRV.setHasFixedSize(true);
         listRV.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        adapter = new HomeRV(locDataArrayList, this);
         listRV.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
 
         search = (EditText) root.findViewById(R.id.search);
 
@@ -160,7 +201,7 @@ public class HomeFragment extends Fragment implements HomeRV.RoomListener{
 
     @Override
     public void onRoomClick(int position) {
-        locDataArrayList.get(position);
+        LocData roomData = locDataArrayList.get(position);
 
         new SingleDateAndTimePickerDialog.Builder(getContext())
                 .backgroundColor(Color.WHITE)
@@ -187,6 +228,33 @@ public class HomeFragment extends Fragment implements HomeRV.RoomListener{
                     @Override
                     public void onDateSelected(Date date) {
 
+                        db.collection("reservations").whereEqualTo("room_id", position + 1)
+                                .whereEqualTo("time_start", (date.getTime() / 1000) - 3300)
+                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    if (task.getResult().size() == 0) {
+                                        Map<String, Object> reservationData = new HashMap<>();
+                                        reservationData.put("time_start", (date.getTime() / 1000) - 3300);
+                                        reservationData.put("time_end", (date.getTime() / 1000) + 300);
+                                        reservationData.put("checked_in", false);
+                                        reservationData.put("checked_out", false);
+                                        reservationData.put("institution_id", 1);
+                                        reservationData.put("rating_submitted", false);
+                                        reservationData.put("room_id", position + 1);
+                                        reservationData.put("check_in_time", -1);
+                                        reservationData.put("check_out_time", -1);
+                                        reservationData.put("user_id", userId);
+
+                                        db.collection("reservations").document().set(reservationData);
+                                        errorPopup("Registration Confirmed!", "Your reservation for " + roomData.getBuilding() + ", " + roomData.getRoom() + " is confirmed!");
+                                    } else {
+                                        errorPopup("Registration Unavailable!", roomData.getBuilding() + ", " + roomData.getRoom() + " already has a registration at this date and time.");
+                                    }
+                                }
+                            }
+                        });
                     }
                 }).display();
     }

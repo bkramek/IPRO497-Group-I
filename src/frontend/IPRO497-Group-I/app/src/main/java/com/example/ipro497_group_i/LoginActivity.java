@@ -87,6 +87,7 @@ public class LoginActivity extends AppCompatActivity implements Serializable {
                                     } else {
                                         Intent intent = new Intent(getBaseContext(), MainActivity.class);
                                         intent.putExtra("userId", task.getResult().getDocuments().get(0).getLong("user_id"));
+                                        intent.putExtra("userPermission", task.getResult().getDocuments().get(0).getLong("permission"));
                                         startActivity(intent);
                                     }
                                 }

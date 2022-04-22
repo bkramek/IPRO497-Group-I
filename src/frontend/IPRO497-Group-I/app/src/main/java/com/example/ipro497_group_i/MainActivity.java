@@ -66,12 +66,18 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         Intent intent = getIntent();
         Long username = intent.getLongExtra("userId", 0);
+        Long userPermission = intent.getLongExtra("userPermission", 1);
         Log.d(TAG, ""+username);
 
 
         viewModel.setMyUserId(username);
 
         admin = false;
+
+        if (userPermission == 2) {
+            admin = true;
+        }
+
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
@@ -90,9 +96,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                     return true;
 
             case R.id.reserve:
-                if(admin){
+                if (admin) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, adminFrag).commit();
-                }else{
+                } else {
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, reserveFrag).commit();
                 }
                 return true;
